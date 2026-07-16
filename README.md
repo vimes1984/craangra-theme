@@ -1,6 +1,6 @@
 # Crann Grá WordPress Theme
 
-A bespoke WordPress block theme (Full Site Editing compatible) designed specifically for **Crann Grá**'s WooCommerce plant nursery store. This theme features custom templates, page patterns, typography, and color styling tailored to garden and horticultural WooCommerce stores.
+A bespoke WordPress block theme (Full Site Editing compatible) designed specifically for the **[Crann Grá](https://cranngra.com)** WooCommerce plant nursery store. This theme features custom templates, page patterns, typography, and color styling tailored to garden and horticultural WooCommerce stores.
 
 ## 🎨 Design System
 
