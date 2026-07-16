@@ -1,0 +1,62 @@
+<footer class="main-footer">
+	<div class="footer-container">
+		<div class="footer-grid">
+			<div class="footer-about">
+				<h3>Crann Grá</h3>
+				<p>A sustainable boutique plant nursery and hobby farm located in the rolling drumlins of County Leitrim, Ireland. Propagating tough, native, and cottage-garden plants for local soil success.</p>
+			</div>
+			<div class="footer-links">
+				<h4>Collections</h4>
+				<a href="/shop/">Wildflowers &amp; Pollinators</a>
+				<a href="/shop/">Ferns &amp; Shade Lovers</a>
+				<a href="/shop/">Kitchen Herbs</a>
+			</div>
+			<div class="footer-contact">
+				<h4>Contact Us</h4>
+				<p>Email: <a href="mailto:hello@cranngra.ie">hello@cranngra.ie</a></p>
+			</div>
+		</div>
+		<div class="footer-bottom text-center">
+			<p>&copy; 2026 Crann Grá. Grown locally, propagated sustainably. All rights reserved.</p>
+		</div>
+	</div>
+</footer>
+
+<button id="backToTopBtn" title="Go to top" style="position: fixed; bottom: 30px; right: 30px; z-index: 99; border: none; outline: none; background-color: var(--primary); color: var(--background); cursor: pointer; border-radius: 50%; font-size: 16px; opacity: 0; visibility: hidden; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center; width: 45px; height: 45px;">
+	<i class="fa-solid fa-arrow-up"></i>
+</button>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	var backToTopBtn = document.getElementById('backToTopBtn');
+	if (backToTopBtn) {
+		window.addEventListener('scroll', function() {
+			if (window.scrollY > 300) {
+				backToTopBtn.style.opacity = '1';
+				backToTopBtn.style.visibility = 'visible';
+			} else {
+				backToTopBtn.style.opacity = '0';
+				backToTopBtn.style.visibility = 'hidden';
+			}
+		});
+		
+		backToTopBtn.addEventListener('click', function() {
+			window.scrollTo({
+				top: 0,
+				behavior: 'smooth'
+			});
+		});
+
+		backToTopBtn.addEventListener('mouseenter', function() {
+			this.style.backgroundColor = 'var(--secondary)';
+			this.style.color = 'var(--primary)';
+			this.style.transform = 'translateY(-3px)';
+		});
+		backToTopBtn.addEventListener('mouseleave', function() {
+			this.style.backgroundColor = 'var(--primary)';
+			this.style.color = 'var(--background)';
+			this.style.transform = 'translateY(0)';
+		});
+	}
+});
+</script>
