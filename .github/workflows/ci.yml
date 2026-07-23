@@ -1,0 +1,79 @@
+# 🍀 Crann Gra Theme — CI Pipeline
+name: CI
+
+on:
+  push:
+    branches: [master, main]
+    paths-ignore:
+      - '**.md'
+      - 'assets/**'
+      - 'images/**'
+  pull_request:
+    branches: [master, main]
+
+permissions:
+  contents: read
+
+jobs:
+  phpcs:
+    name: PHP Code Standards
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          tools: composer, phpcs
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+
+      - name: Run PHPCS
+        run: composer lint
+
+  validate:
+    name: Validate Theme
+    runs-on: ubuntu-latest
+    needs: phpcs
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+
+      - name: Validate style.css
+        run: |
+          if [ -f style.css ]; then
+            echo "✅ style.css exists"
+            grep -q "Theme Name:" style.css && echo "✅ Theme Name header found" || echo "⚠️  No Theme Name header"
+          else
+            echo "❌ style.css missing!"
+            exit 1
+          fi
+
+      - name: Validate theme.json
+        run: |
+          if [ -f theme.json ]; then
+            echo "✅ theme.json exists"
+            python3 -c "import json; json.load(open('theme.json')); print('✅ theme.json is valid JSON')"
+          else
+            echo "⚠️  No theme.json"
+          fi
+
+      - name: Check PHP syntax
+        run: |
+          find . -name '*.php' -not -path '*/vendor/*' -exec php -l {} \; 2>&1 | grep -v "No syntax errors" | head -20

@@ -1,0 +1,14 @@
+# Crann Gra WordPress Theme
+.DS_Store
+*.log
+node_modules/
+vendor/
+.sass-cache/
+*.css.map
+*.map
+dist/
+build/
+.env
+*.sql
+*.gz
+*.zip
